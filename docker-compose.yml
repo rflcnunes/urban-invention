@@ -12,20 +12,17 @@ services:
     volumes:
       - ./:/usr/src/app
   mongo:
-    image: mongo
+    image: mongo:latest
     container_name: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGODB_DATABASE: test
     ports:
       - 27017:27017
-    volumes:
-      - ./data/db/mongo:/data/db
 
   mongo-express:
     image: mongo-express
-    container_name: mongo-express
+    container_name: mongo-express-app
     restart: always
     ports:
       - 8081:8081
