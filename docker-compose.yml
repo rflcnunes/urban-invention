@@ -11,6 +11,8 @@ services:
       - 3030:3030
     volumes:
       - ./:/usr/src/app
+    networks:
+      - chatbot_network
   mongo:
     image: mongo:latest
     container_name: mongo
@@ -19,6 +21,8 @@ services:
       MONGODB_DATABASE: test
     ports:
       - 27017:27017
+    networks:
+      - chatbot_network
 
   mongo-express:
     image: mongo-express
@@ -32,6 +36,8 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    networks:
+      - chatbot_network
 
 volumes:
   mongo:
@@ -40,3 +46,7 @@ volumes:
     driver: local
   node:
     driver: local
+
+networks:
+  chatbot_network:
+    driver: bridge
